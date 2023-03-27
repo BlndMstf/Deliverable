@@ -13,10 +13,10 @@ public class UnoGame extends Game {
     @Override
     public void play(){
     
-    };
+    }
     
     @Override
     public void declareWinner(){
     
-    };
+    }
 }
