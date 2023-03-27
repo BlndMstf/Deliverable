@@ -26,7 +26,7 @@ public class UnoCard extends Card {
         return this.value;
     }
 
-    public Color getColour() {
+    public Color getColor() {
         return this.color;
     }
     
