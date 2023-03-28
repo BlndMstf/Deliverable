@@ -1,8 +1,8 @@
 package ca.sheridancollege.project;
 /**
- * Players use this to discard a card from their hand.
+ * Ends the turn, then switches to the next player.
  *
  * @author Blend Mustafa March 2023
  */
-public class DiscardCard {
+public class EndTurn {
 }
