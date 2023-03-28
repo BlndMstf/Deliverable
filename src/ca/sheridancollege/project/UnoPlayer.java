@@ -1,16 +1,23 @@
 package ca.sheridancollege.project;
 
-public class UnoPlayer extends Player {
-    /**
-    * The class for the UnoPlayer player which extends from the abstract class Player
-    * Since Player is an abstract class, you cannot make instances of it,
-    * so for that reason, this class exists.
-    * Each player in Uno essentially plays the same role, the role of a dealer is not so important
-    * since the dealer role does not come with any additional responsibilities or functionalities.
-    * 
-    * @author Blend Mustafa March 2023
-    */
-    public UnoPlayer(String name) {
+public class UnoPlayer extends Player { /**
+	 * Player has a hand that belongs to them
+	 * @param name
+	 */
+    
+    protected UnoPlayer(String name) {
         super(name);
     }
+
+	public Hand getHand() {
+		return this.hand;
+	}
+
+	/**
+	 * 
+	 * @param hand
+	 */
+	public void setHand(Hand hand) {
+		this.hand = hand;
+	}
 }
