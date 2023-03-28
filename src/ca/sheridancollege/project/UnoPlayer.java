@@ -4,6 +4,7 @@ public class UnoPlayer extends Player { /**
 	 * Player has a hand that belongs to them
 	 * @param name
 	 */
+    private Hand hand;
     
     protected UnoPlayer(String name) {
         super(name);
