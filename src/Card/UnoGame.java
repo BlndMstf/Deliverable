@@ -36,7 +36,7 @@ public class UnoGame extends Game {
     public void takeTurn(UnoPlayer player){
         PlayerActions actions = new PlayerActions(player, discardPile, drawPile);
         int drawLimit = 0; //limits number of draws you can make
-        int playerHandSize = player.getHand().getCards().size();
+        int playerHandSize = player.getHand().getCards().size(); //size of the player's hand
         while (true){
             //This whole code activates whenever it's a new turn
             System.out.println("The top card is " + discardPile.getTopCard()); //Displays the top card of the discard pile
@@ -52,7 +52,7 @@ public class UnoGame extends Game {
             sets the top card to be whatever the player discarded if valid,
             then removes the card from the players hand. otherwise, prompts the player again
             */
-            if (cardIndex > 0 && cardIndex < playerHandSize){
+            if (cardIndex >= 0 && cardIndex < playerHandSize){
                 if (actions.canPlayCard((UnoCard)player.getHand().getCard(cardIndex))==true){
                     actions.playCard((UnoCard)player.getHand().getCard(cardIndex));
                     break;
