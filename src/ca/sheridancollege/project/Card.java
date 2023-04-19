@@ -1,5 +1,15 @@
+ blend
 
 
+
+/**
+ * SYST 17796 Project Base code.
+ * Students can modify and extend to implement their game.
+ * Mehmet Yunus Sakalli
+ * Youngje Bae
+ * Blend Mustafa
+ */
+ master
 package ca.sheridancollege.project;
 
 public abstract class Card {
