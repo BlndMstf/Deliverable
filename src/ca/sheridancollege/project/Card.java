@@ -1,6 +1,6 @@
 
 
-package Card;
+package ca.sheridancollege.project;
 
 public abstract class Card {
     private final String suit;

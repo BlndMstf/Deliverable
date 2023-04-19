@@ -1,5 +1,11 @@
 package Card;
 
+import ca.sheridancollege.project.UnoCard;
+import ca.sheridancollege.project.UnoPlayer;
+import ca.sheridancollege.project.UnoGame;
+import ca.sheridancollege.project.DiscardPile;
+import ca.sheridancollege.project.DrawPile;
+import ca.sheridancollege.project.PlayerActions;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

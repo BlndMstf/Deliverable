@@ -1,6 +1,6 @@
 
 
-package Card;
+package ca.sheridancollege.project;
 
 /**
  * This class is Software Design SYST17796 18401

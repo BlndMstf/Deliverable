@@ -1,4 +1,4 @@
-package Card;
+package ca.sheridancollege.project;
 
 /**
  * This class +++ Insert Description Here +++

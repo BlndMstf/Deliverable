@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 
-package Card;
+package ca.sheridancollege.project;
 
 /**
  * This Class is SYST10199 Web Programming
