@@ -34,7 +34,7 @@ public class UnoGame extends Game {
     }
     
     public void takeTurn(UnoPlayer player){
-        PlayerActions actions = new PlayerActions(player, discardPile, drawPile);
+        PlayerActions actions = new PlayerActions(player, players, discardPile, drawPile);
         int drawLimit = 0; //limits number of draws you can make
         int playerHandSize = player.getHand().getCards().size(); //size of the player's hand
         while (true){
@@ -62,13 +62,29 @@ public class UnoGame extends Game {
                 }
             }
             else if (cardIndex == playerHandSize && drawLimit == 0){ //if player chooses to draw a card
-                actions.drawCard();
+                actions.playerDrawsCard();
                 playerHandSize = player.getHand().getCards().size(); //gets the new size
                 drawLimit++;
             }
             else {
                 System.out.println("YOU CANNOT DRAW MORE CARDS THIS ROUND");
+            
+                boolean canPlayCard = false;
+                ArrayList <UnoCard> playersCards = player.getHand().getCards();
+                
+                for (UnoCard c : playersCards) {
+                    if (actions.canPlayCard(c)) {
+                        canPlayCard = true;
+                        break;
+                    }
+                }
+                
+                if (!canPlayCard) {
+                    System.out.println("There are no cards you can play, your turn is skipped");
+                    actions.skipTurn();
+                }
             }
+            
         }
     }
 
@@ -76,15 +92,17 @@ public class UnoGame extends Game {
     public void play() {
         //ArrayList<UnoPlayer> players = new ArrayList<>();
 
-        // Get number of players
+        
         int numOfPlayers = 4;
-        drawPile.fill();
-
+        String playerName = "";
         // Create players
         for (int i = 0; i < numOfPlayers; i++) {
-            String playerName = "Player " + (i + 1);
+            System.out.println("Enter The Name of Player #" + (i+1));
+            playerName = scanner.nextLine();
             players.add(new UnoPlayer(playerName));
         }
+
+        drawPile.fill();
 
         // Shuffle the draw pile and distribute cards to players
         Collections.shuffle(drawPile.getCards());

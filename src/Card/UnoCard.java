@@ -8,7 +8,7 @@ package Card;
  * @author Mehmet Sakalli
  */
 public class UnoCard extends Card {
-    private final Color color;
+    private Color color;
     private final Value value;
     
     
@@ -29,6 +29,11 @@ public class UnoCard extends Card {
 
     public Color getColor() {
         return color;
+    }
+
+    public void setColor(Color color) {
+        this.color=color;
+
     }
 
     public Value getValue() {

@@ -15,7 +15,7 @@ public class DiscardPile {
         topCard = null;
     }
 
-    public Card getTopCard() {
+    public UnoCard getTopCard() {
         return topCard;
     }
 
