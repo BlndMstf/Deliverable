@@ -31,7 +31,6 @@ public class UnoGameTest {
 
     @Before
     public void setUpClass() {
-        UnoGame game = new UnoGame("Uno");
         //this will run before all tests
         discardPile = new DiscardPile();
         drawPile = new DrawPile(discardPile);
@@ -163,9 +162,6 @@ public class UnoGameTest {
     @Test
     public void canChooseColorGood() {
     System.out.println("Testing if can choose color good");
-    ArrayList<UnoPlayer> players = new ArrayList<>();
-    UnoPlayer player = new UnoPlayer("Tester");
-    PlayerActions actions = new PlayerActions(player, players, discardPile, drawPile);
     System.out.println("Choose a color (Red, Green, Blue, or Yellow): ");
     String input = "blue"; //pretend the user has chosen blue
     if (input.equalsIgnoreCase("red") || input.equalsIgnoreCase("green")
@@ -181,9 +177,6 @@ public class UnoGameTest {
     @Test
     public void canChooseColorBad() {
     System.out.println("Testing if can choose color bad");
-    ArrayList<UnoPlayer> players = new ArrayList<>();
-    UnoPlayer player = new UnoPlayer("Tester");
-    PlayerActions actions = new PlayerActions(player, players, discardPile, drawPile);
     System.out.println("Choose a color (Red, Green, Blue, or Yellow): ");
     String input = "purple"; //pretend the user has chosen purple
     if (input.equalsIgnoreCase("red") && !input.equalsIgnoreCase("green")
@@ -199,9 +192,6 @@ public class UnoGameTest {
     @Test
     public void canChooseColorBoundary() {
     System.out.println("Testing if can choose color bad");
-    ArrayList<UnoPlayer> players = new ArrayList<>();
-    UnoPlayer player = new UnoPlayer("Tester");
-    PlayerActions actions = new PlayerActions(player, players, discardPile, drawPile);
     System.out.println("Choose a color (Red, Green, Blue, or Yellow): ");
     String input = "GrEeN"; //pretend the user has chosen green
     if (input.equalsIgnoreCase("red") || input.equalsIgnoreCase("green")
