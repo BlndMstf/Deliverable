@@ -65,7 +65,7 @@ public class PlayerActions {
     public void drawCard() {
         // Draw a card from the draw pile and add it to the player's hand
         UnoCard card = drawPile.drawCard();
-        currentPlayer.getHand().addCard(card);
-        System.out.println(currentPlayer.getName() + " drew " + card);
+        currentPlayer.getHand().getCards().add(card);
+        System.out.println(currentPlayer.getName() + " drew " + card.toString());
     }
 }

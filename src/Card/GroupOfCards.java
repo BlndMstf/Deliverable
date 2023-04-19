@@ -13,7 +13,7 @@ import java.util.Collections;
 public class GroupOfCards {
     private final int size;
     //protected final Card[] cards;
-    private final ArrayList<Card> cards;
+    private final ArrayList<UnoCard> cards;
 
     public GroupOfCards(int size) {
         this.size = size;
@@ -25,7 +25,7 @@ public class GroupOfCards {
         return size;
     }
 
-    public void setCard(int index, Card card) {
+    public void setCard(int index, UnoCard card) {
         //cards[index] = card;
         cards.set(index, card);
     }

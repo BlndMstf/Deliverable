@@ -34,23 +34,42 @@ public class UnoGame extends Game {
     }
     
     public void takeTurn(UnoPlayer player){
-        //This whole code activates whenever it's a new turn
-        System.out.println("The top card is " + discardPile.getTopCard()); //Displays the top card of the discard pile
-        System.out.println(player.getName() + ", here are your cards.");
-        for (int i = 0; i < player.getHand().getCards().size(); i++){
-            System.out.println((i + 1) + ". " + player.getHand().getCards().get(i).toString());
-        }
-        System.out.println((player.getHand().getCards().size() + 1) + ". Draw a card"); //There should be some logic to make this draw a card
-        System.out.print("Enter the index number of the card you would like to play: ");
-        int cardIndex = scanner.nextInt()-1; //ex. if the player enters 1, it should go to index 0, hence -1
+        PlayerActions actions = new PlayerActions(player, discardPile, drawPile);
+        int drawLimit = 0; //limits number of draws you can make
+        int playerHandSize = player.getHand().getCards().size();
+        while (true){
+            //This whole code activates whenever it's a new turn
+            System.out.println("The top card is " + discardPile.getTopCard()); //Displays the top card of the discard pile
+            System.out.println(player.getName() + ", here are your cards.");
+            for (int i = 0; i < playerHandSize; i++){
+                System.out.println((i + 1) + ". " + player.getHand().getCards().get(i).toString()); //Prints each card
+            }
+            System.out.println((playerHandSize + 1) + ". Draw a card"); //There should be some logic to make this draw a card
+            System.out.print("Enter the index number of the card you would like to play: ");
+            int cardIndex = scanner.nextInt()-1; //ex. if the player enters 1, it should go to index 0, hence -1
         
-        /*
-        sets the top card to be whatever the player discarded,
-        then removes the card from the players hand
-        there should be some logic here to check if the card is valid 
-        */
-        discardPile.setTopCard((UnoCard)player.getHand().getCard(cardIndex));
-        player.getHand().getCards().remove(cardIndex);
+            /*
+            sets the top card to be whatever the player discarded if valid,
+            then removes the card from the players hand. otherwise, prompts the player again
+            */
+            if (cardIndex > 0 && cardIndex < playerHandSize){
+                if (actions.canPlayCard((UnoCard)player.getHand().getCard(cardIndex))==true){
+                    actions.playCard((UnoCard)player.getHand().getCard(cardIndex));
+                    break;
+                }
+                else {
+                    System.out.println("PLEASE CHOOSE A DIFFERENT CARD.");
+                }
+            }
+            else if (cardIndex == playerHandSize && drawLimit == 0){ //if player chooses to draw a card
+                actions.drawCard();
+                playerHandSize = player.getHand().getCards().size(); //gets the new size
+                drawLimit++;
+            }
+            else {
+                System.out.println("YOU CANNOT DRAW MORE CARDS THIS ROUND");
+            }
+        }
     }
 
     @Override

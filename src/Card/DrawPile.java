@@ -12,7 +12,7 @@ import java.util.Collections;
 public class DrawPile{
     private final DiscardPile discardPile;
     
-    private final ArrayList<Card> cards;
+    private final ArrayList<UnoCard> cards;
 
     public DrawPile(DiscardPile discardPile) {
         this.discardPile = discardPile;

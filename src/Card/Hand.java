@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * @author Mehmet Sakalli
  */
 public class Hand {
-    private final ArrayList<Card> cards;
+    private final ArrayList<UnoCard> cards;
 
     public Hand() {
         this.cards = new ArrayList<>();
@@ -23,7 +23,7 @@ public class Hand {
         return cards.size();
     }
 
-    public void addCard(Card card) {
+    public void addCard(UnoCard card) {
         cards.add(card);
     }
 
@@ -35,7 +35,7 @@ public class Hand {
         cards.remove(index);
     }
 
-    public boolean containsCard(Card card) {
+    public boolean containsCard(UnoCard card) {
         return cards.contains(card);
     }
 
