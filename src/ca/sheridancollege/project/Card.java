@@ -1,4 +1,3 @@
- blend
 
 
 
@@ -9,7 +8,6 @@
  * Youngje Bae
  * Blend Mustafa
  */
- master
 package ca.sheridancollege.project;
 
 public abstract class Card {
