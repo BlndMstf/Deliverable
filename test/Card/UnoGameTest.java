@@ -9,14 +9,13 @@ import ca.sheridancollege.project.PlayerActions;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import java.util.ArrayList;
 
 /**
 *
-* @author meghapatel
+* @author meghapatel 
 * @author Blend Mustafa
 */
 public class UnoGameTest {
@@ -200,6 +199,54 @@ public class UnoGameTest {
             }
     Enum expResult = UnoCard.Color.GREEN;//expected color, should be GREEN
     Enum result = discardPile.getTopCard().getColor(); //actual color
+    
+    assertEquals(expResult, result);
+    }
+    
+    @Test
+    public void initializePlayersGood() {
+    int numOfPlayers = 4;
+    ArrayList<UnoPlayer> players = new ArrayList<>();
+        String playerName = "";
+        // Create players
+        for (int i = 0; i < numOfPlayers; i++) {
+            playerName = "Player " + (i+1);
+            players.add(new UnoPlayer(playerName));
+        }
+    String expResult = "Player 1";
+    String result = players.get(0).getName();
+    
+    assertEquals(expResult, result);
+    }
+    
+    @Test
+    public void initializePlayersBad() {
+    int numOfPlayers = 4;
+    ArrayList<UnoPlayer> players = new ArrayList<>();
+        String playerName = "";
+        // Create players
+        for (int i = 0; i < numOfPlayers; i++) {
+            //this doesn't even give any names to the player
+            players.add(new UnoPlayer(playerName));
+        }
+    String expResult = "";
+    String result = players.get(0).getName();
+    
+    assertEquals(expResult, result);
+    }
+    
+    @Test
+    public void initializePlayersBoundary() {
+    int numOfPlayers = 4;
+    ArrayList<UnoPlayer> players = new ArrayList<>();
+        String playerName = "";
+        // Create players
+        for (int i = 0; i < numOfPlayers; i++) {
+            playerName = "Player"; //players all have the exact name
+            players.add(new UnoPlayer(playerName));
+        }
+    String expResult = "Player";
+    String result = players.get(0).getName();
     
     assertEquals(expResult, result);
     }  
