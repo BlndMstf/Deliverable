@@ -140,9 +140,15 @@ public class PlayerActions {
 
     
     public void reverseOrder() {
+        // Reverse the order of the players list
         Collections.reverse(players);
+        // Set the currentPlayer to the new first player
+        currentPlayer = players.get(0);
+        // Skip the new first player's turn
         skipTurn();
     }
+
+
 
     public void setColor(UnoCard.Color color) {
         discardPile.getTopCard().setColor(color);
