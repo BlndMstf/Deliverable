@@ -25,16 +25,15 @@ public class DrawPile{
 
     public void fill() {
         for (UnoCard.Color color : UnoCard.Color.values()) {
+            // add new cards to the pile
             for (UnoCard.Value value : UnoCard.Value.values()) {
-                if (value == UnoCard.Value.WILD_CARD || value == UnoCard.Value.DRAW_FOUR) {
-                    continue; // Skip wildcards and draw four cards
-                }
                 UnoCard card = new UnoCard(color, value);
                 cards.add(card);
             }
         }
         Collections.shuffle(cards);
     }
+
 
     public UnoCard drawCard() {
         if (cards.isEmpty()) {
