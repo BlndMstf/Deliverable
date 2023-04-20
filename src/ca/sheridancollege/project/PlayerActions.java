@@ -122,16 +122,21 @@ public class PlayerActions {
         // Increment the currentPlayerIndex to get the index of the next player
         // Assuming you have a List<Player> called players and a Player called currentPlayer
         int currentPlayerIndex = players.indexOf(currentPlayer);
-        currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
-        // Return the next player in the list
-        return players.get(currentPlayerIndex);
+        // If the current player is the last in the list, return the first player
+        // Otherwise, return the next player in the list
+        if (currentPlayerIndex == players.size() - 1) {
+            return players.get(0);
+        } else {
+            return players.get(currentPlayerIndex + 1);
+        }
     }
 
     public void skipTurn() {
-        // Increment the index to the next player, but don't play their turn
+        // Set the currentPlayer to the next player without playing their turn
         System.out.println(currentPlayer.getName() + " skips their turn");
         currentPlayer = nextPlayer();
     }
+
     
     public void reverseOrder() {
         Collections.reverse(players);
