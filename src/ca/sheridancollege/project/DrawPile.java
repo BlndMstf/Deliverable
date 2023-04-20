@@ -33,6 +33,17 @@ public class DrawPile {
      * Fills the draw pile with the standard deck of Uno cards.
      */
     public void fill() {
+
+        for (UnoCard.Color color : UnoCard.Color.values()) {
+            for (UnoCard.Value value : UnoCard.Value.values()) {
+                /*
+                if (value == UnoCard.Value.WILD_CARD || value == UnoCard.Value.DRAW_FOUR) {
+                    continue; // Skip wildcards and draw four cards
+                }
+                */
+                UnoCard card = new UnoCard(color, value);
+                cards.add(card);
+
         // Add 2 of each color and value except for Wild Card and Draw Four
         for (int i = 0; i < 2; i++) {
             for (UnoCard.Color color : UnoCard.Color.values()) {
@@ -43,6 +54,7 @@ public class DrawPile {
                     UnoCard card = new UnoCard(color, value);
                     cards.add(card);
                 }
+
             }
         }
 

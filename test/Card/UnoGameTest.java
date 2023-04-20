@@ -9,14 +9,13 @@ import ca.sheridancollege.project.PlayerActions;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import java.util.ArrayList;
 
 /**
 *
-* @author meghapatel
+* @author meghapatel 
 * @author Blend Mustafa
 */
 public class UnoGameTest {
@@ -26,13 +25,14 @@ public class UnoGameTest {
     private static UnoGame game;
     
     public UnoGameTest() {
+
     }
 
-    @BeforeClass
-    public static void setUpClass() {
-        UnoGame game = new UnoGame("Uno");
+    @Before
+    public void setUpClass() {
         //this will run before all tests
         discardPile = new DiscardPile();
+        drawPile = new DrawPile(discardPile);
         //Default card to be used in each test is RED ZERO
         discardPile.setTopCard(new UnoCard(UnoCard.Color.RED,UnoCard.Value.ZERO));
         System.out.println("Beginning of Unit test\n ");
@@ -104,9 +104,15 @@ public class UnoGameTest {
     ArrayList<UnoPlayer> players = new ArrayList<>();
     UnoPlayer player = new UnoPlayer("Tester");
     PlayerActions actions = new PlayerActions(player, players, discardPile, drawPile);
-    UnoCard testCard = new UnoCard(UnoCard.Color.RED, UnoCard.Value.ONE);
-    int expResult = 0;//draw limit
-    int result = 0;//number of times drawn
+    drawPile.fill(); //fill drawpile with cards
+    boolean hasDrawn = false; //checks if user already drew card (only checks manual draws)
+    if (hasDrawn == false){
+        actions.playerDrawsCard(); //player draws a card
+        hasDrawn = true;
+    }
+    int handSize = player.getHand().getCards().size(); //number of cards in player's hand
+    int expResult = 1;//number of cards that are expected to be in hand
+    int result = handSize; //number of cards in hand
 
     //the test will pass if the result is same as expresult
     assertEquals(expResult, result);
@@ -118,26 +124,130 @@ public class UnoGameTest {
     ArrayList<UnoPlayer> players = new ArrayList<>();
     UnoPlayer player = new UnoPlayer("Tester");
     PlayerActions actions = new PlayerActions(player, players, discardPile, drawPile);
-    UnoCard testCard = new UnoCard(UnoCard.Color.RED, UnoCard.Value.ONE);
-    int expResult = 1;//draw limit
-    int result = 1;//number of times drawn
-
-    //the test will pass if the result is NOT same as expresult
+    drawPile.fill(); //fill drawpile with cards
+    boolean hasDrawn = true; //checks if user already drew card (only checks manual draws)
+    if (hasDrawn == false){
+        actions.playerDrawsCard(); //player draws a card
+        hasDrawn = true;
+    }
+    int handSize = player.getHand().getCards().size(); //number of cards in player's hand
+    int expResult = 0;//number of cards that are expected to be in hand
+    int result = handSize; //number of cards in hand
+    
     assertEquals(expResult, result);
     }
     
     @Test
     public void canDrawCardBoundary() {
-    System.out.println("Testing if can draw card boundary");
+    System.out.println("Testing if can draw card bad");
     ArrayList<UnoPlayer> players = new ArrayList<>();
     UnoPlayer player = new UnoPlayer("Tester");
     PlayerActions actions = new PlayerActions(player, players, discardPile, drawPile);
-    UnoCard testCard = new UnoCard(UnoCard.Color.RED, UnoCard.Value.ONE);
-    int expResult = 0;//draw limit
-    int result = 2;//number of times drawn
-
-    //the test will pass if the result is NOT same as expresult
-    assertNotEquals(expResult, result);
+    drawPile.fill(); //fill drawpile with cards
+    actions.playerDrawsCard(); //forced draw from +2, not manual draw
+    actions.playerDrawsCard(); //forced draw from +2, not manual draw
+    boolean hasDrawn = false; //checks if user already drew card (only checks manual draws)
+    if (hasDrawn == false){
+        actions.playerDrawsCard(); //player draws a card
+        hasDrawn = true;
+    }
+    int handSize = player.getHand().getCards().size(); //number of cards in player's hand
+    int expResult = 3;//number of cards that are expected to be in hand
+    int result = handSize; //number of cards in hand
+    
+    assertEquals(expResult, result);
     }  
     
+    @Test
+    public void canChooseColorGood() {
+    System.out.println("Testing if can choose color good");
+    System.out.println("Choose a color (Red, Green, Blue, or Yellow): ");
+    String input = "blue"; //pretend the user has chosen blue
+    if (input.equalsIgnoreCase("red") || input.equalsIgnoreCase("green")
+                || input.equalsIgnoreCase("blue") || input.equalsIgnoreCase("yellow")){
+    discardPile.getTopCard().setColor(UnoCard.Color.valueOf(input.toUpperCase()));
+            }
+    Enum expResult = UnoCard.Color.BLUE;//expected color, should be BLUE
+    Enum result = discardPile.getTopCard().getColor(); //actual color
+    
+    assertEquals(expResult, result);
+    } 
+    
+    @Test
+    public void canChooseColorBad() {
+    System.out.println("Testing if can choose color bad");
+    System.out.println("Choose a color (Red, Green, Blue, or Yellow): ");
+    String input = "purple"; //pretend the user has chosen purple
+    if (input.equalsIgnoreCase("red") && !input.equalsIgnoreCase("green")
+                && !input.equalsIgnoreCase("blue") && !input.equalsIgnoreCase("yellow")){
+    discardPile.getTopCard().setColor(UnoCard.Color.valueOf(input.toUpperCase()));
+            }
+    Enum expResult = UnoCard.Color.RED;//expected color, RED because it shouldn't change
+    Enum result = discardPile.getTopCard().getColor(); //actual color
+    
+    assertEquals(expResult, result);
+    }
+    
+    @Test
+    public void canChooseColorBoundary() {
+    System.out.println("Testing if can choose color bad");
+    System.out.println("Choose a color (Red, Green, Blue, or Yellow): ");
+    String input = "GrEeN"; //pretend the user has chosen green
+    if (input.equalsIgnoreCase("red") || input.equalsIgnoreCase("green")
+                || input.equalsIgnoreCase("blue") || input.equalsIgnoreCase("yellow")){
+    discardPile.getTopCard().setColor(UnoCard.Color.valueOf(input.toUpperCase()));
+            }
+    Enum expResult = UnoCard.Color.GREEN;//expected color, should be GREEN
+    Enum result = discardPile.getTopCard().getColor(); //actual color
+    
+    assertEquals(expResult, result);
+    }
+    
+    @Test
+    public void initializePlayersGood() {
+    int numOfPlayers = 4;
+    ArrayList<UnoPlayer> players = new ArrayList<>();
+        String playerName = "";
+        // Create players
+        for (int i = 0; i < numOfPlayers; i++) {
+            playerName = "Player " + (i+1);
+            players.add(new UnoPlayer(playerName));
+        }
+    String expResult = "Player 1";
+    String result = players.get(0).getName();
+    
+    assertEquals(expResult, result);
+    }
+    
+    @Test
+    public void initializePlayersBad() {
+    int numOfPlayers = 4;
+    ArrayList<UnoPlayer> players = new ArrayList<>();
+        String playerName = "";
+        // Create players
+        for (int i = 0; i < numOfPlayers; i++) {
+            //this doesn't even give any names to the player
+            players.add(new UnoPlayer(playerName));
+        }
+    String expResult = "";
+    String result = players.get(0).getName();
+    
+    assertEquals(expResult, result);
+    }
+    
+    @Test
+    public void initializePlayersBoundary() {
+    int numOfPlayers = 4;
+    ArrayList<UnoPlayer> players = new ArrayList<>();
+        String playerName = "";
+        // Create players
+        for (int i = 0; i < numOfPlayers; i++) {
+            playerName = "Player"; //players all have the exact name
+            players.add(new UnoPlayer(playerName));
+        }
+    String expResult = "Player";
+    String result = players.get(0).getName();
+    
+    assertEquals(expResult, result);
+    }  
 }
