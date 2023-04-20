@@ -28,16 +28,17 @@ public class PlayerActions {
 
     // Method to check if a card can be played
     public boolean canPlayCard(UnoCard card) {
-        // Check if card matches the color or value of the top card on the discard pile
+        // Check if card matches the value of the top card on the discard pile
         UnoCard topCard = (UnoCard) discardPile.getTopCard();
-        if (card.getValue() == UnoCard.Value.WILD_CARD) {
-            return true; // Wild cards can always be played
+        if (card.getValue() == UnoCard.Value.WILD_CARD || card.getValue() == UnoCard.Value.DRAW_FOUR) {
+            return true; // Wild cards and +4 cards can always be played
         } else if (card.getColor() == topCard.getColor() || card.getValue() == topCard.getValue()) {
             return true; // Card matches color or value of top card
         } else {
             return false; // Player cannot play any cards
         }
     }
+
     
 
     // Method to play a card
