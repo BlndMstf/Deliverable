@@ -25,7 +25,12 @@ public class UnoCard extends Card {
         super(color.toString(), value.toString());
         this.color = color;
         this.value = value;
+        // Set color to null for wild cards and +4 cards
+        if (value == Value.WILD_CARD || value == Value.DRAW_FOUR) {
+            this.color = "";
+        }
     }
+
 
     public Color getColor() {
         return color;
